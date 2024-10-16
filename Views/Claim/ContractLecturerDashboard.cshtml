@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Claim>
+
+<h2>Upload Supporting Documents</h2>
+<form asp-action="UploadDocument" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Attach Document:</label>
+        <input type="file" name="file" />
+    </div>
+    <button type="submit">Upload</button>
+</form>
+
+<h2>Claim Status</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Claim </th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.FirstName @claim.LastName</td>
+                <td>@claim.ClaimAmount</td>
+                <td>@claim.Status</td>
+                <td>
+                    <a asp-action="SubmitClaim">Submit New Claim</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="SubmitClaim" asp-controller="Claim" method="get">
+    <button type="submit">Submit New Claim</button>
+</form>
